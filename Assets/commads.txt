@@ -1,0 +1,4 @@
+./program сube --L 10 --origin (0,0,0) "cube.stl"
+./program sphere --R 5 --origin "(0,0,0)" --filepath "sphere.stl"
+
+./program Split --input "cube.stl" --origin "(0.0, 0.0, 0.0)" --direction "(1.0, 1.0, 0.0)" --output1 "cube1.stl" --output2 "cube2.stl"
