@@ -1,2 +1,7 @@
 *.stl
 .vscode
+
+ThirdParty
+glad.c
+include
+build

@@ -29,7 +29,7 @@ Vec STLParser::calculateNormal(const Vec& v1, const Vec& v2, const Vec& v3)
 TriangleSoup STLParser::read(const std::string& filename)
 {
     TriangleSoup triangles;
-    std::ifstream file("Assets/" + filename);
+    std::ifstream file(filename);
     if (!file)
     {
         std::cerr << "Error: Cannot open file " << filename << std::endl;
@@ -51,7 +51,7 @@ TriangleSoup STLParser::read(const std::string& filename)
         }
         else if (word == "vertex")
         {
-            Vertex v;
+            STLVertex v;
             v.normal = normal;
             iss >> v.pos.x >> v.pos.y >> v.pos.z;
             triangles.push_back(v);

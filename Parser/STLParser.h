@@ -18,13 +18,13 @@ struct Vec {double x,y,z;
     }
 };
 
-struct Vertex
+struct STLVertex
 {
     Vec pos;
     Vec normal;
 };
 
-using TriangleSoup = std::vector<Vertex>;
+using TriangleSoup = std::vector<STLVertex>;
 
 class STLParser
 {

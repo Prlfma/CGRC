@@ -70,7 +70,7 @@ bool Split::isAbovePlane(const Vec &point, const Vec &origin, const Vec &normal)
     return d > 0.0;
 }
 
-Vertex Split::intersectEdgeWithPlane(const Vertex &v1, const Vertex &v2,
+STLVertex Split::intersectEdgeWithPlane(const STLVertex &v1, const STLVertex &v2,
                                      const Vec &planeOrigin, const Vec &planeNormal)
 {
     Vec edge = v2.pos - v1.pos;
@@ -87,7 +87,7 @@ Vertex Split::intersectEdgeWithPlane(const Vertex &v1, const Vertex &v2,
     edge.y = edge.y * fac;
     edge.z = edge.z * fac;
 
-    Vertex result;
+    STLVertex result;
     result.pos.x = v1.pos.x + edge.x;
     result.pos.y = v1.pos.y + edge.y;
     result.pos.z = v1.pos.z + edge.z;
@@ -103,9 +103,9 @@ void Split::splitMesh(const TriangleSoup &inputMesh, const Vec &origin, const Ve
 {
     for (size_t i = 0; i < inputMesh.size(); i += 3)
     {
-        Vertex v1 = inputMesh[i];
-        Vertex v2 = inputMesh[i + 1];
-        Vertex v3 = inputMesh[i + 2];
+        STLVertex v1 = inputMesh[i];
+        STLVertex v2 = inputMesh[i + 1];
+        STLVertex v3 = inputMesh[i + 2];
 
         bool above1 = isAbovePlane(v1.pos, origin, normal);
         bool above2 = isAbovePlane(v2.pos, origin, normal);
@@ -125,7 +125,7 @@ void Split::splitMesh(const TriangleSoup &inputMesh, const Vec &origin, const Ve
         }
         else
         {
-            std::vector<Vertex> vertices = {v1, v2, v3};
+            std::vector<STLVertex> vertices = {v1, v2, v3};
             std::vector<bool> above = {above1, above2, above3};
 
             std::vector<size_t> aboveIndices, belowIndices;
@@ -139,12 +139,12 @@ void Split::splitMesh(const TriangleSoup &inputMesh, const Vec &origin, const Ve
 
             if (aboveIndices.size() == 1)
             {
-                Vertex a = vertices[aboveIndices[0]];
-                Vertex b = vertices[belowIndices[0]];
-                Vertex c = vertices[belowIndices[1]];
+                STLVertex a = vertices[aboveIndices[0]];
+                STLVertex b = vertices[belowIndices[0]];
+                STLVertex c = vertices[belowIndices[1]];
 
-                Vertex i1 = intersectEdgeWithPlane(a, b, origin, normal);
-                Vertex i2 = intersectEdgeWithPlane(a, c, origin, normal);
+                STLVertex i1 = intersectEdgeWithPlane(a, b, origin, normal);
+                STLVertex i2 = intersectEdgeWithPlane(a, c, origin, normal);
 
                 meshAbove.push_back(a);
                 meshAbove.push_back(i1);
@@ -160,12 +160,12 @@ void Split::splitMesh(const TriangleSoup &inputMesh, const Vec &origin, const Ve
             }
             else
             {
-                Vertex a = vertices[belowIndices[0]];
-                Vertex b = vertices[aboveIndices[0]];
-                Vertex c = vertices[aboveIndices[1]];
+                STLVertex a = vertices[belowIndices[0]];
+                STLVertex b = vertices[aboveIndices[0]];
+                STLVertex c = vertices[aboveIndices[1]];
 
-                Vertex i1 = intersectEdgeWithPlane(a, b, origin, normal);
-                Vertex i2 = intersectEdgeWithPlane(a, c, origin, normal);
+                STLVertex i1 = intersectEdgeWithPlane(a, b, origin, normal);
+                STLVertex i2 = intersectEdgeWithPlane(a, c, origin, normal);
 
                 meshBelow.push_back(a);
                 meshBelow.push_back(i1);
