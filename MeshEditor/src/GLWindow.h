@@ -21,8 +21,9 @@ Repeat = 2,
 };
 enum class ButtonCode
 { 
-Button_0 = 0,
-//... repeats all buttons codes from the glfw header
+    Left   = 0,
+    Right  = 1,
+    Middle = 2,
 };
 enum class KeyCode
 { 
@@ -49,6 +50,14 @@ N     = 78,  // Blue -
 NUM_1 = 49,
 NUM_2 = 50,
 NUM_3 = 51,
+F1 = 290,
+    F2 = 291,
+    F3 = 292,
+    F4 = 293,
+    F5 = 294,
+    F6 = 295,
+    F7 = 296,
+    F8 = 297
 };
 class GLWindow
 { 

@@ -25,6 +25,8 @@ add_executable(${PROJECT_NAME}
     src/main.cpp
     src/GLRenderSystem.cpp
     src/GLWindow.cpp
+    src/Camera.cpp
+    src/Viewport.cpp
     src/glad.c
     ../Parser/STLParser.cpp
 )
