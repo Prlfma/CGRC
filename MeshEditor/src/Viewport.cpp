@@ -48,7 +48,7 @@ ray Viewport::calcCursorRay(double x, double y) const {
 
     double yInv = height - y;
 
-    glm::vec3 a = glm::unProject(glm::vec3(x, yInv, -1.0), view, proj, viewport);
+    glm::vec3 a = glm::unProject(glm::vec3(x, yInv, 0.0), view, proj, viewport);
     glm::vec3 b = glm::unProject(glm::vec3(x, yInv, 1.0), view, proj, viewport);
 
     return ray{ a, glm::normalize(b - a) };

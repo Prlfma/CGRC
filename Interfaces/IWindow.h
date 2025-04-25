@@ -1,8 +1,6 @@
 #pragma once
-#define GLFW_INCLUDE_NONE
-#include "../ThirdParty\glfw\include\GLFW\glfw3.h"
-#include "../include/glad.h"
 
+#include "../ThirdParty\glfw\include\GLFW\glfw3.h"
 #include <functional>
 
 enum class Modifier
@@ -38,6 +36,7 @@ UP    = 265,  // GLFW_KEY_UP
     D     = 68,
     SPACE = 32,
     ESC   = 256 ,
+    DELETE = 46,
 Space = 32,
 
 R     = 82,  // Red +
@@ -59,30 +58,21 @@ F1 = 290,
     F7 = 296,
     F8 = 297
 };
-class GLWindow
-{ 
 
-public: 
+class IWindow
+{ 
+public:
 using KeyCallback = std::function<void(KeyCode, Action, Modifier)>;
 using CursorPosCallback = std::function<void(double, double)>;
-using MouseCallback = std::function<void(ButtonCode, Action, Modifier, double, double)>;
+using MouseCallback = std::function<void(ButtonCode, Action, Modifier, double, 
+double)>;
 using ScrollCallback = std::function<void(double, double)>;
-GLWindow(const std::string& title, uint32_t width, uint32_t height);
-~GLWindow();
-uint32_t getWidth() const; 
-uint32_t getHeight() const; 
-void setKeyCallback(const KeyCallback& callback);
-void setCursorPosCallback(const CursorPosCallback& callback);
-void setMouseCallback(const MouseCallback& callback);
-void setScrollCallback(const ScrollCallback& callback);
-GLFWwindow* getGLFWHandle() const; 
-private: 
-GLFWwindow* handle = nullptr;
-uint32_t width, height;
-
-KeyCallback keyCallback;
-CursorPosCallback cursorPosCallback;
-MouseCallback mouseCallback;
-ScrollCallback scrollCallback;
-
+virtual ~IWindow() {}
+virtual uint32_t getWidth() const = 0;
+virtual uint32_t getHeight() const = 0;
+virtual void setKeyCallback(const KeyCallback& callback) = 0;
+virtual void setCursorPosCallback(const CursorPosCallback& callback) = 0;
+virtual void setMouseCallback(const MouseCallback& callback) = 0;
+virtual void setScrollCallback(const ScrollCallback& callback) = 0;
+virtual GLFWwindow* getNativeHandle() const = 0; 
 };

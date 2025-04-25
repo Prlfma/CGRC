@@ -62,7 +62,7 @@ TriangleSoup STLParser::read(const std::string& filename)
 
 void STLParser::write(const TriangleSoup& triangleSoup, const std::string& filename)
 {
-    std::ofstream file("Assets/" + filename);
+    std::ofstream file("../Assets/" + filename);
     if (!file)
     {
         std::cerr << "Error: Cannot write to file " << filename << std::endl;

@@ -1,5 +1,5 @@
+#include "glad.h"
 #include "GLRenderSystem.h"
-#include "../include/glad.h"
 #include <vector>
 #include <iostream>
 
@@ -26,7 +26,7 @@ namespace {
 
     Light lights[8];
 
-    RenderMode renderMode = RenderMode::Triangles;
+    
 }
 
 void GLRenderSystem::init()
@@ -112,18 +112,18 @@ void GLRenderSystem::setViewport(double x, double y, double width, double height
     glViewport((int)x, (int)y, (int)width, (int)height);
 }
 
-void GLRenderSystem::renderTriangleSoup(const std::vector<Vertex>& vertices, const glm::vec3& matColor)
+void GLRenderSystem::renderTriangleSoup(const std::vector<VertexSimple>& vertices, const glm::vec3& matColor)
 {
     glUseProgram(shaderProgram);
     glBindVertexArray(vao);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(VertexSimple), vertices.data(), GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexSimple), (void*)offsetof(VertexSimple, position));
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexSimple), (void*)offsetof(VertexSimple, normal));
     glEnableVertexAttribArray(1);
 
     glUniformMatrix4fv(uWorld, 1, GL_FALSE, &worldMatrix[0][0]);

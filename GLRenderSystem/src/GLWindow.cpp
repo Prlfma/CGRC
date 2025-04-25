@@ -1,7 +1,7 @@
 #include "GLWindow.h"
 #include <iostream>
 
-GLWindow::GLWindow(const std::string& title, uint32_t width, uint32_t height)
+GLWindow::GLWindow(uint32_t width, uint32_t height, const std::string& title)
     : width(width), height(height)
 {
     handle = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
@@ -92,7 +92,7 @@ void GLWindow::setScrollCallback(const ScrollCallback& callback)
     scrollCallback = callback;
 }
 
-GLFWwindow* GLWindow::getGLFWHandle() const
+GLFWwindow* GLWindow::getNativeHandle() const
 {
     return handle;
 }

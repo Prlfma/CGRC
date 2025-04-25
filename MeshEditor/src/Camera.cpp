@@ -65,9 +65,9 @@ void Camera::setIsoView() {
 }
 
 void Camera::orbit(glm::vec3 a, glm::vec3 b) {
-   // Розраховуємо різницю між векторами (аналог руху миші)
+   // Розраховуємо різницю між векторами 
    glm::vec2 delta(b.x - a.x, b.y - a.y);
-   const float sensitivity = 0.005f;  // Можна зробити параметром функції
+   const float sensitivity = 0.005f;  
    
    // Горизонтальне обертання (навколо up-вектора)
    rotate(target, up, -delta.x * sensitivity);
